@@ -1,3 +1,246 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= user.name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data</title>
+    <style>
+     #tb td{
+      word-wrap: break-word;
+      max-width: 150px;
+     }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/dashboard">EMR</a>
+          
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Data</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link " href="#">BHYT</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <span style="font-weight: bold;padding-right: 20px;" id="username"><%= user.name %></span>
+            <a href="/users/logout" class="btn btn-danger">Logout</a>
+    
+          </form>
+        </div>
+      </nav>
+    <h1 class="mt-4" style="text-align: center;">Dadshboard</h1><br>
+    
+    
+   
+    <table id="tb">
+        <tr>
+          <th>Họ tên</th>
+          <th>Giới tính</th>
+          <th>Tuổi</th>
+          <th>Địa chỉ</th>
+          <th>Tình trạng bệnh</th>
+        </tr>
+        <tr class="get">
+          <td>Nguyễn Văn Anh</td>
+          <td>Nam</td>
+          <td>10</td>
+          <td>Long An</td>
+          <td>Sốt nhẹ</td>
+        </tr>
+        <tr class="get">
+            <td>Trần Hùng Sơn</td>
+            <td>Nam</td>
+            <td>41</td>
+            <td>Hà Nội</td>
+            <td>Đau vai</td>
+          </tr>
+         
+          <tr class="get">
+            <td>Lý Lệ Hà</td>
+            <td>Nữ</td>
+            <td>89</td>
+            <td>Hồ Chí Minh</td>
+            <td>Bệnh lão</td>
+          </tr>
+          <tr class="get">
+            <td>Lê Đình Quý</td>
+            <td>Nam</td>
+            <td>3</td>
+            <td>Long An</td>
+            <td>Da liễu</td>
+          </tr>
+          <tr class="get">
+            <td>Mai Thị Hoàng</td>
+            <td>Nữ</td>
+            <td>22</td>
+            <td>Bình Định</td>
+            <td>Đau bụng</td>
+          </tr>      
+      </table>
+     <br> 
+    <input id="in_pass" type="password" placeholder="Nhập mật khẩu để xem thông tin bệnh nhân" style="width: 350px;">
+    <input id="secret" type="text" placeholder="Nhập secret..." style="width: 350px;">
+
+    <button class="btn btn-info" id="xem">Xem</button>
+    <footer style="padding-top: 60px;"></footer>
+
+    
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.6.0/base64.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
+<script>
+
+var username = document.getElementById('username').innerText
+var A=[] 
+var B=[] 
+var C=[] 
+var D=[] 
+var E=[] 
+
+
+  /************A***************/ 
+  $('#tb tr.get').each(function(){  
+    A.push($(this).find('td').eq(0).text());
+    
+  });
+
+  var A1 = []
+  for(i=0;i<A.length;i++){
+    A1.push(CryptoJS.AES.encrypt(A[i],username))
+  }
+
+
+  for(i=0;i<A1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[0].innerHTML = A1[i]
+
+  }
+  /************end A***************/ 
+/************B***************/ 
+$('#tb tr.get').each(function(){  
+    B.push($(this).find('td').eq(1).text());
+    
+  });
+
+  var B1 = []
+  for(i=0;i<B.length;i++){
+    B1.push(CryptoJS.AES.encrypt(B[i],username))
+  }
+
+
+  for(i=0;i<B1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[1].innerHTML = B1[i]
+
+  }
+  /************end B***************/ 
+
+ /************C***************/ 
+ $('#tb tr.get').each(function(){  
+   C.push($(this).find('td').eq(2).text());
+    
+  });
+
+  var C1 = []
+  for(i=0;i<C.length;i++){
+    C1.push(CryptoJS.AES.encrypt(C[i],username))
+  }
+
+
+  for(i=0;i<C1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[2].innerHTML = C1[i]
+
+  }
+  /************end C***************/ 
+
+
+   /************D***************/ 
+   $('#tb tr.get').each(function(){  
+    D.push($(this).find('td').eq(3).text());
+    
+  });
+
+  var D1 = []
+  for(i=0;i<D.length;i++){
+    D1.push(CryptoJS.AES.encrypt(D[i],username))
+  }
+
+
+  for(i=0;i<D1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[3].innerHTML = D1[i]
+
+  }
+  /************end D***************/ 
+
+
+   /************E***************/ 
+   $('#tb tr.get').each(function(){  
+    E.push($(this).find('td').eq(4).text());
+    
+  });
+
+  var E1 = []
+  for(i=0;i<B.length;i++){
+   E1.push(CryptoJS.AES.encrypt(E[i],username))
+  }
+
+
+  for(i=0;i<E1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[4].innerHTML = E1[i]
+
+  }
+ 
+  /************end E***************/ 
+document.getElementById('xem').addEventListener('click',()=>{
+  var secret = document.getElementById('secret').value
+  var in_pass = document.getElementById('in_pass').value
+  if(in_pass === localStorage.getItem("checkpass") && secret ===username){
+    for(i=0;i<A1.length;i++){
+      x = document.getElementById('tb').rows[i+1].cells
+      x[0].innerHTML = (CryptoJS.AES.decrypt(A1[i], secret).toString(CryptoJS.enc.Utf8))
+    }
+
+    for(i=0;i<B1.length;i++){
+      x = document.getElementById('tb').rows[i+1].cells
+      x[1].innerHTML = (CryptoJS.AES.decrypt(B1[i], secret).toString(CryptoJS.enc.Utf8))
+    }
+
+    for(i=0;i<C1.length;i++){
+      x = document.getElementById('tb').rows[i+1].cells
+      x[2].innerHTML = (CryptoJS.AES.decrypt(C1[i], secret).toString(CryptoJS.enc.Utf8))
+    }
+
+    for(i=0;i<D1.length;i++){
+      x = document.getElementById('tb').rows[i+1].cells
+      x[3].innerHTML = (CryptoJS.AES.decrypt(D1[i], secret).toString(CryptoJS.enc.Utf8))
+    }
+
+    for(i=0;i<E1.length;i++){
+      x = document.getElementById('tb').rows[i+1].cells
+      x[4].innerHTML = (CryptoJS.AES.decrypt(E1[i], secret).toString(CryptoJS.enc.Utf8))
+    }
+
+  }else{
+    alert('Sai khóa! Bạn không thể xem thông tin bệnh nhân!')
+  }
+  
+})
+
+
+
+</script>  
+</body>
+</html>

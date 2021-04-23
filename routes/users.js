@@ -2,15 +2,27 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const ExpressBrute = require('express-brute');
+
+var store = new ExpressBrute.MemoryStore(); 
+var bruteforce = new ExpressBrute(store, {
+  freeRetries: 3,            // only allow 2 incorrect requests
+  minWait: 5 * 1000,         // min wait time of 5 seconds
+  maxWait: 1 * 60 * 1000,    // max wait time of 5 minutes
+
+  // use default callback function if all retries are used
+  failCallback: ExpressBrute.FailTooManyRequests
+});
+
 // Load User model
 const User = require('../models/User');
 const { forwardAuthenticated } = require('../config/auth');
 
 // Login Page
-router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
+router.get('/login',bruteforce.prevent,forwardAuthenticated, (req, res) => res.render('login'));
 
 // Register Page
-router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+router.get('/register',forwardAuthenticated, (req, res) => res.render('register'));
 
 // Register
 router.post('/register', (req, res) => {

@@ -1,0 +1,99 @@
+/************B***************/ 
+$('#tb tr.get').each(function(){  
+    B.push($(this).find('td').eq(0).text());
+   
+});
+
+var B1 = []
+for(i=0;i<B.length;i++){
+    A1.push(Base64.encode(B[i]))
+}
+
+
+for(i=0;i<B1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[0].innerHTML = B1[i]
+
+}
+ /************end B***************/
+
+ /************C***************/ 
+ $('#tb tr.get').each(function(){  
+    C.push($(this).find('td').eq(1).text());
+   
+});
+
+var C1 = []
+for(i=0;i<C.length;i++){
+    C1.push(Base64.encode(C[i]))
+}
+
+
+for(i=0;i<C1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[1].innerHTML = C1[i]
+
+}
+ /************end C***************/
+
+  /************D***************/ 
+$('#tb tr.get').each(function(){  
+    D.push($(this).find('td').eq(2).text());
+   
+});
+
+var D1 = []
+for(i=0;i<A.length;i++){
+    D1.push(Base64.encode(D[i]))
+}
+
+
+for(i=0;i<D1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[2].innerHTML = D1[i]
+
+}
+ /************end D***************/
+
+
+  /************E***************/ 
+  $('#tb tr.get').each(function(){  
+    E.push($(this).find('td').eq(3).text());
+   
+});
+
+var E1 = []
+for(i=0;i<A.length;i++){
+    E1.push(Base64.encode(E[i]))
+}
+
+
+for(i=0;i<E1.length;i++){
+  x = document.getElementById('tb').rows[i+1].cells
+  x[3].innerHTML = E1[i]
+
+}
+ /************end E***************/
+
+
+
+
+ for(i=0;i<B.length;i++){
+    x = document.getElementById('tb').rows[i+1].cells
+    x[0].innerHTML = B[i]
+    }
+
+    for(i=0;i<C.length;i++){
+    x = document.getElementById('tb').rows[i+1].cells
+    x[1].innerHTML = C[i]
+    }
+
+    for(i=0;i<D.length;i++){
+    x = document.getElementById('tb').rows[i+1].cells
+    x[2].innerHTML = D[i]
+    }
+
+    for(i=0;i<E.length;i++){
+    x = document.getElementById('tb').rows[i+1].cells
+    x[3].innerHTML = E[i]
+    }
